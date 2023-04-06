@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>ChatGPT by TaypeR</title>
+    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+      /* Основной стиль страницы */
+body {
+  background-color: #1a1a1a;
+  color: #f2f2f2;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Стили для заголовка */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+/* Стили для чата */
+#chatlog {
+  border: 1px solid #ccc;
+  height: 85vh;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+  padding: 10px;
+  font-size: 24px;
+}
+
+/* Стили для формы отправки сообщения */
+#chatform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#chatform input[type="text"] {
+  flex-grow: 1;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+#chatform button {
+  border: none;
+  border-radius: 5px;
+  background-color: #1abc9c;
+  color: #f2f2f2;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#chatform button:hover {
+  background-color: #16a085;
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>ChatGPT by TaypeR</h1>
+    </header>
+    <main>
+      <div id="chatlog"></div>
+      <form id="chatform">
+        <input type="text" id="usermsg" placeholder="Type your message here...">
+        <button type="submit">Send</button>
+      </form>
+    </main>
+    <script>
+      const form = document.getElementById("chatform");
+const chatlog = document.getElementById("chatlog");
+const usermsg = document.getElementById("usermsg");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const message = usermsg.value;
+  addMessage("You", message);
+  sendMessage(message);
+  usermsg.value = "";
+});
+
+function addMessage(user, message) {
+  const messageNode = document.createElement("div");
+  messageNode.innerHTML = `<strong>${user}:</strong> ${message}`;
+  chatlog.appendChild(messageNode);
+  chatlog.scrollTop = chatlog.scrollHeight;
+}
+
+async function sendMessage(message) {
+  const response = await fetch("/api/chatgpt", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ message }),
+  });
+  const data = await response.json();
+  addMessage("ChatGPT", data.response);
+}
+    </script>
+  </body>
+</html>

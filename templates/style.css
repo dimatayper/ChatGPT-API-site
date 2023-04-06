@@ -1,0 +1,56 @@
+/* Основной стиль страницы */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Стили для заголовка */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+/* Стили для чата */
+#chatlog {
+  border: 1px solid #ccc;
+  height: 400px;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+  padding: 10px;
+}
+
+/* Стили для формы отправки сообщения */
+#chatform {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#chatform input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
+}
+
+#chatform button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#chatform button:hover {
+  background-color: #3e8e41;
+}
